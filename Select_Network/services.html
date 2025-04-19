@@ -1,149 +1,370 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Our Services | Select Network</title>
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" as="style">
+  
+  <!-- Tailwind CSS with config -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- GSAP (for animations) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-
-<!-- Your custom JS -->
-<script src="js/script.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Open Sans', 'sans-serif'],
+            heading: ['Montserrat', 'sans-serif']
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-out forwards',
+            'float': 'float 6s ease-in-out infinite'
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  
+  <!-- GSAP for animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+  
   <style>
-    body { font-family: 'Open Sans', sans-serif; }
-    h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
+    /* Custom animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
   </style>
 </head>
-<body class="bg-white">
+
+<body class="bg-white dark:bg-gray-900 transition-colors duration-300">
   <!-- Navbar -->
-  <nav class="bg-[#0A2463] text-white p-4 shadow-lg">
+  <nav class="bg-[#0A2463] dark:bg-gray-800 text-white p-4 shadow-lg sticky top-0 z-50">
     <div class="container mx-auto flex justify-between items-center">
-      <a href="index.html" class="text-2xl font-bold">SELECT NETWORK</a>
-      <div class="hidden md:flex space-x-8">
-        <a href="index.html" class="hover:text-[#3E92CC]">Home</a>
-        <a href="services.html" class="text-[#3E92CC] font-semibold">Services</a>
-        <a href="portfolio.html" class="hover:text-[#3E92CC]">Portfolio</a>
-        <a href="about.html" class="hover:text-[#3E92CC]">About</a>
-        <a href="contact.html" class="hover:text-[#3E92CC]">Contact</a>
+      <a href="index.html" class="text-2xl font-bold font-heading">SELECT NETWORK</a>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex space-x-8 items-center">
+        <a href="index.html" class="hover:text-[#3E92CC] dark:hover:text-blue-300 transition">Home</a>
+        <a href="services.html" class="text-[#3E92CC] dark:text-blue-300 font-semibold">Services</a>
+        <a href="portfolio.html" class="hover:text-[#3E92CC] dark:hover:text-blue-300 transition">Portfolio</a>
+        <a href="about.html" class="hover:text-[#3E92CC] dark:hover:text-blue-300 transition">About</a>
+        <a href="contact.html" class="hover:text-[#3E92CC] dark:hover:text-blue-300 transition">Contact</a>
+        
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition">
+          <span class="dark:hidden">🌙</span>
+          <span class="hidden dark:inline">☀️</span>
+        </button>
       </div>
-         <!-- Mobile Menu Button (NEW) -->
-    <button class="md:hidden mobile-menu-button" aria-label="Toggle menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden mobile-menu-button p-3" aria-label="Toggle menu">
+        <svg class="w-8 h-8 transition-transform" id="menu-icon">
+          <path stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                d="M4 6h16M4 12h16M4 18h16" class="menu-icon-open"/>
+          <path stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+                d="M6 18L18 6M6 6l12 12" class="menu-icon-close hidden"/>
         </svg>
       </button>
     </div>
-     <!-- Mobile Menu (NEW) - Hidden by default -->
-  <div class="mobile-menu hidden md:hidden bg-[#0A2463] py-4 px-4">
-    <a href="index.html" class="block py-2 hover:text-[#3E92CC]">Home</a>
-    <a href="services.html" class="block py-2 text-[#3E92CC] font-semibold">Services</a>
-    <a href="portfolio.html" class="block py-2 hover:text-[#3E92CC]">Portfolio</a>
-    <!-- ... other mobile nav links ... -->
-  </div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu hidden md:hidden bg-[#0A2463] dark:bg-gray-700 py-2 px-4 transition-all duration-300">
+      <a href="index.html" class="block py-3 px-4 hover:bg-white/10 rounded transition">Home</a>
+      <a href="services.html" class="block py-3 px-4 bg-white/10 rounded transition text-[#3E92CC] dark:text-blue-300">Services</a>
+      <a href="portfolio.html" class="block py-3 px-4 hover:bg-white/10 rounded transition">Portfolio</a>
+      <a href="about.html" class="block py-3 px-4 hover:bg-white/10 rounded transition">About</a>
+      <a href="contact.html" class="block py-3 px-4 hover:bg-white/10 rounded transition">Contact</a>
+      <div class="pt-2 mt-2 border-t border-white/10">
+        <button id="mobile-theme-toggle" class="flex items-center py-2 px-4 w-full">
+          <span class="mr-2 dark:hidden">🌙</span>
+          <span class="mr-2 hidden dark:inline">☀️</span>
+          <span class="dark:hidden">Dark Mode</span>
+          <span class="hidden dark:inline">Light Mode</span>
+        </button>
+      </div>
+    </div>
   </nav>
 
   <!-- Services Hero -->
-  <section class="bg-[#0A2463] text-white py-16 text-center">
-    <h1 class="text-4xl md:text-5xl font-bold mb-4">Our Services</h1>
-    <p class="text-xl max-w-2xl mx-auto">Tailored solutions to elevate your brand’s presence.</p>
+  <section class="relative bg-gradient-to-r from-[#0A2463] to-[#3E92CC] text-white py-24 text-center overflow-hidden">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-[#3E92CC] filter blur-3xl animate-float"></div>
+      <div class="absolute bottom-1/3 right-1/4 w-40 h-40 rounded-full bg-[#0A2463] filter blur-3xl animate-float animation-delay-2000"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">Our Services</h1>
+      <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8 animate-fade-in animation-delay-100">Tailored solutions to elevate your brand's presence</p>
+    </div>
   </section>
 
   <!-- Services Grid -->
   <section class="py-16 container mx-auto px-4">
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
       <!-- Service 1: Graphic Design -->
-      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
-        <div class="bg-[#3E92CC] w-12 h-12 rounded-full flex items-center justify-center mb-4">
-          <span class="text-white text-2xl">✏️</span>
+      <div class="service-card glass-card p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+        <div class="bg-[#3E92CC] w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto">
+          <span class="text-white text-3xl">✏️</span>
         </div>
-        <h3 class="text-xl font-bold mb-2">Graphic Design</h3>
-        <p class="text-gray-600">Logos, flyers, business cards, and more.</p>
+        <h3 class="text-2xl font-bold mb-4 text-center text-[#0A2463] dark:text-white">Graphic Design</h3>
+        <p class="text-gray-600 dark:text-gray-300 text-center">Logos, flyers, business cards, and more that make your brand stand out.</p>
       </div>
 
       <!-- Service 2: Digital Marketing -->
-      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
-        <div class="bg-[#3E92CC] w-12 h-12 rounded-full flex items-center justify-center mb-4">
-          <span class="text-white text-2xl">📈</span>
+      <div class="service-card glass-card p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+        <div class="bg-[#3E92CC] w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto">
+          <span class="text-white text-3xl">📈</span>
         </div>
-        <h3 class="text-xl font-bold mb-2">Digital Marketing</h3>
-        <p class="text-gray-600">Social media, SEO, and ad campaigns.</p>
+        <h3 class="text-2xl font-bold mb-4 text-center text-[#0A2463] dark:text-white">Digital Marketing</h3>
+        <p class="text-gray-600 dark:text-gray-300 text-center">Data-driven social media, SEO, and ad campaigns that convert.</p>
       </div>
 
       <!-- Service 3: Branding -->
-      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
-        <div class="bg-[#3E92CC] w-12 h-12 rounded-full flex items-center justify-center mb-4">
-          <span class="text-white text-2xl">🎨</span>
+      <div class="service-card glass-card p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+        <div class="bg-[#3E92CC] w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto">
+          <span class="text-white text-3xl">🎨</span>
         </div>
-        <h3 class="text-xl font-bold mb-2">Branding</h3>
-        <p class="text-gray-600">Corporate identity and strategy.</p>
+        <h3 class="text-2xl font-bold mb-4 text-center text-[#0A2463] dark:text-white">Branding</h3>
+        <p class="text-gray-600 dark:text-gray-300 text-center">Complete corporate identity and strategy development.</p>
       </div>
 
       <!-- Service 4: Web Development -->
-      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
-        <div class="bg-[#3E92CC] w-12 h-12 rounded-full flex items-center justify-center mb-4">
-          <span class="text-white text-2xl">💻</span>
+      <div class="service-card glass-card p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+        <div class="bg-[#3E92CC] w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto">
+          <span class="text-white text-3xl">💻</span>
         </div>
-        <h3 class="text-xl font-bold mb-2">Web Development</h3>
-        <p class="text-gray-600">Fast, responsive, and SEO-friendly sites.</p>
+        <h3 class="text-2xl font-bold mb-4 text-center text-[#0A2463] dark:text-white">Web Development</h3>
+        <p class="text-gray-600 dark:text-gray-300 text-center">Fast, responsive, and SEO-optimized websites that perform.</p>
       </div>
     </div>
   </section>
 
   <!-- Pricing Tiers -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 dark:bg-gray-800">
     <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-12">Simple Pricing</h2>
-      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-12 text-[#0A2463] dark:text-white">Simple Pricing</h2>
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <!-- Bronze -->
-        <div class="bg-white p-8 rounded-lg shadow-md">
-          <h3 class="text-2xl font-bold mb-4 text-[#0A2463]">Bronze</h3>
-          <p class="text-4xl font-bold mb-6">$199<span class="text-lg">/project</span></p>
-          <ul class="text-left space-y-3 mb-8">
-            <li>✓ 1 Logo Design</li>
-            <li>✓ 2 Flyer Designs</li>
-            <li>✓ 1 Revision Round</li>
-            <li>✗ No Website</li>
+        <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+          <h3 class="text-2xl font-bold mb-4 text-[#0A2463] dark:text-white">Bronze</h3>
+          <p class="text-4xl font-bold mb-6 dark:text-white">$199<span class="text-lg">/project</span></p>
+          <ul class="text-left space-y-3 mb-8 text-gray-600 dark:text-gray-300">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>1 Logo Design</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>2 Flyer Designs</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>1 Revision Round</span>
+            </li>
+            <li class="flex items-start text-gray-400 dark:text-gray-500">
+              <svg class="w-5 h-5 text-gray-400 dark:text-gray-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+              <span>No Website</span>
+            </li>
           </ul>
-          <button class="bg-[#0A2463] text-white px-6 py-2 rounded-lg hover:bg-[#3E92CC]">Get Started</button>
+          <button class="w-full bg-[#0A2463] hover:bg-[#3E92CC] text-white px-6 py-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 dark:bg-gray-600 dark:hover:bg-gray-500">
+            Get Started
+          </button>
         </div>
 
         <!-- Silver (Highlighted) -->
-        <div class="bg-white p-8 rounded-lg shadow-lg border-2 border-[#3E92CC] transform scale-105">
-          <h3 class="text-2xl font-bold mb-4 text-[#0A2463]">Silver</h3>
-          <p class="text-4xl font-bold mb-6">$499<span class="text-lg">/project</span></p>
-          <ul class="text-left space-y-3 mb-8">
-            <li>✓ Full Brand Identity</li>
-            <li>✓ 5 Flyer Designs</li>
-            <li>✓ 3 Revision Rounds</li>
-            <li>✓ Basic Website</li>
+        <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-2xl border-2 border-[#3E92CC] transform scale-105 z-10">
+          <div class="absolute top-0 right-0 bg-[#3E92CC] text-white px-4 py-1 rounded-bl-lg rounded-tr-lg text-sm font-bold">
+            POPULAR
+          </div>
+          <h3 class="text-2xl font-bold mb-4 text-[#0A2463] dark:text-white">Silver</h3>
+          <p class="text-4xl font-bold mb-6 dark:text-white">$499<span class="text-lg">/project</span></p>
+          <ul class="text-left space-y-3 mb-8 text-gray-600 dark:text-gray-300">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>Full Brand Identity</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>5 Flyer Designs</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>3 Revision Rounds</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>Basic Website</span>
+            </li>
           </ul>
-          <button class="bg-[#3E92CC] text-white px-6 py-2 rounded-lg hover:bg-[#0A2463]">Popular Choice</button>
+          <button class="w-full bg-[#3E92CC] hover:bg-[#0A2463] text-white px-6 py-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 dark:bg-blue-600 dark:hover:bg-blue-700">
+            Popular Choice
+          </button>
         </div>
 
         <!-- Gold -->
-        <div class="bg-white p-8 rounded-lg shadow-md">
-          <h3 class="text-2xl font-bold mb-4 text-[#0A2463]">Gold</h3>
-          <p class="text-4xl font-bold mb-6">$999<span class="text-lg">/project</span></p>
-          <ul class="text-left space-y-3 mb-8">
-            <li>✓ Premium Branding</li>
-            <li>✓ Unlimited Designs</li>
-            <li>✓ 5 Revision Rounds</li>
-            <li>✓ Advanced Website + SEO</li>
+        <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+          <h3 class="text-2xl font-bold mb-4 text-[#0A2463] dark:text-white">Gold</h3>
+          <p class="text-4xl font-bold mb-6 dark:text-white">$999<span class="text-lg">/project</span></p>
+          <ul class="text-left space-y-3 mb-8 text-gray-600 dark:text-gray-300">
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>Premium Branding</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>Unlimited Designs</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>5 Revision Rounds</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>Advanced Website + SEO</span>
+            </li>
           </ul>
-          <button class="bg-[#0A2463] text-white px-6 py-2 rounded-lg hover:bg-[#3E92CC]">Go Premium</button>
+          <button class="w-full bg-[#0A2463] hover:bg-[#3E92CC] text-white px-6 py-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 dark:bg-gray-600 dark:hover:bg-gray-500">
+            Go Premium
+          </button>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-[#0A2463] text-white py-8">
+  <footer class="bg-[#0A2463] dark:bg-gray-800 text-white py-8">
     <div class="container mx-auto px-4 text-center">
       <p>© 2025 Select Network. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.querySelector('.mobile-menu-button');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const menuIconOpen = document.querySelector('.menu-icon-open');
+    const menuIconClose = document.querySelector('.menu-icon-close');
+    
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      menuIconOpen.classList.toggle('hidden');
+      menuIconClose.classList.toggle('hidden');
+      
+      // Animate menu
+      if (!mobileMenu.classList.contains('hidden')) {
+        gsap.from(mobileMenu, {
+          opacity: 0,
+          y: -20,
+          duration: 0.3
+        });
+      }
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+        mobileMenu.classList.add('hidden');
+        menuIconOpen.classList.remove('hidden');
+        menuIconClose.classList.add('hidden');
+      }
+    });
+    
+    // Dark/Light Mode Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    
+    const toggleTheme = () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    };
+    
+    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+    if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+    
+    // Initialize theme
+    if (localStorage.getItem('theme') === 'dark' || 
+        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+    
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Animate service cards on scroll
+    gsap.utils.toArray('.service-card').forEach((card, i) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: "top 80%",
+          toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 50,
+        duration: 0.6,
+        delay: i * 0.1,
+        ease: "back.out"
+      });
+    });
+    
+    // Animate pricing cards
+    gsap.utils.toArray('.bg-white').forEach((card, i) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 30,
+        duration: 0.5,
+        delay: i * 0.15,
+        ease: "power2.out"
+      });
+    });
+  </script>
 </body>
 </html>

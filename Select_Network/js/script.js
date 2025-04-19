@@ -1,23 +1,24 @@
-// Scroll-triggered animations (using GSAP - lightweight)
-document.addEventListener('DOMContentLoaded', () => {
-  // Animate service cards on scroll
-  gsap.from(".service-card", {
+// script.js
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('mouseenter', () => {
+    link.style.transform = 'scale(1.05)';
+    link.style.textShadow = '0 0 10px rgba(62, 146, 204, 0.7)';
+  });
+  link.addEventListener('mouseleave', () => {
+    link.style.transform = 'scale(1)';
+    link.style.textShadow = 'none';
+  });
+});
+gsap.utils.toArray('.service-card').forEach(card => {
+  gsap.from(card, {
+    scrollTrigger: {
+      trigger: card,
+      start: "top 80%",
+      toggleActions: "play none none none"
+    },
     opacity: 0,
     y: 50,
-    duration: 0.8,
-    stagger: 0.2,
-    scrollTrigger: {
-      trigger: "#services",
-      start: "top 80%"
-    }
-  });
-
-  // Pulse CTA button
-  gsap.to(".cta-button", {
-    scale: 1.05,
-    repeat: -1,
-    yoyo: true,
-    duration: 1.5
+    duration: 0.8
   });
 });
 
@@ -63,3 +64,17 @@ mobileMenuButton.addEventListener('click', () => {
     });
   }
 });
+// Lazy loading
+const lazyImages = document.querySelectorAll('.lazy-load');
+const imageObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      img.src = img.dataset.src;
+      img.classList.remove('blur-up');
+      imageObserver.unobserve(img);
+    }
+  });
+});
+
+lazyImages.forEach(img => imageObserver.observe(img));

@@ -1,12 +1,15 @@
 /* Card hover effect */
+
 .service-card {
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  }
-  
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(62, 146, 204, 0.3);
+}
   /* Button hover */
   .cta-button {
     transition: background 0.3s;
@@ -23,3 +26,11 @@
   .mobile-menu-button.active svg {
     transform: rotate(90deg);
   }
+  /* Load critical font first */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/montserrat-bold.woff2') format('woff2');
+}
