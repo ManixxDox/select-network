@@ -5,6 +5,9 @@
   <title>Select Network | Design & Marketing Agency</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
   <!-- Add Google Fonts (Montserrat/Open Sans) -->
 </head>
 <body class="bg-white font-sans">
@@ -17,7 +20,20 @@
         <a href="/services.html" class="hover:text-[#3E92CC]">Services</a>
         <!-- ... -->
       </div>
+        <!-- Mobile Menu Button (NEW) -->
+    <button class="md:hidden mobile-menu-button" aria-label="Toggle menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
     </div>
+     <!-- Mobile Menu (NEW) - Hidden by default -->
+  <div class="mobile-menu hidden md:hidden bg-[#0A2463] py-4 px-4">
+    <a href="index.html" class="block py-2 hover:text-[#3E92CC]">Home</a>
+    <a href="services.html" class="block py-2 text-[#3E92CC] font-semibold">Services</a>
+    <a href="portfolio.html" class="block py-2 hover:text-[#3E92CC]">Portfolio</a>
+    <!-- ... other mobile nav links ... -->
+  </div>
   </nav>
   <!-- Hero Section -->
   <section class="bg-[#0A2463] text-white py-20 px-4 text-center">
