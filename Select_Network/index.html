@@ -1,5 +1,102 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Network | Design & Marketing Agency</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Select Network - Premium design and marketing agency specializing in brand development, web design, and digital campaigns.">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="logo.svg" as="image" type="image/svg+xml" imagesrcset="logo.svg 1x, logo@2x.svg 2x">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" as="style">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Favicon and Apple Touch Icons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Open Sans', 'sans-serif'],
+            heading: ['Montserrat', 'sans-serif']
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-out forwards',
+            'float': 'float 6s ease-in-out infinite'
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  
+  <!-- Critical CSS -->
+  <style>
+    /* Custom animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    
+    /* Typing animation */
+    .typing-container {
+      display: inline-block;
+      position: relative;
+    }
+    
+    .typing-words {
+      display: inline-block;
+      position: relative;
+      margin-left: 0.25em;
+      vertical-align: top;
+      height: 1.2em;
+    }
+    
+    .typing-word {
+      position: absolute;
+      opacity: 0;
+      left: 0;
+      top: 0;
+      animation: typing-word 9s infinite;
+      color: #FFFFFF;
+      font-weight: bold;
+    }
+    
+    /* Accessibility improvements */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .typing-word {
+        animation: none !important;
+        position: static;
+        opacity: 1;
+        display: inline;
+      }
+    }
+
+    /* Logo transition for dark mode */
+    .logo-transition {
+      transition: filter 0.3s ease-in-out;
+    }
+  </style>
+</head><html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <title>Select Network | Design & Marketing Agency</title>
@@ -122,7 +219,7 @@
       }
     }
   </style>
-</head>
+
 
 <body class="bg-white dark:bg-gray-900 transition-colors duration-200">
   <!-- Skip to content link -->

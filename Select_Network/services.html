@@ -38,9 +38,54 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
   
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Font Awesome (self-hosted) -->
+  <!-- Add this instead -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Select Network",
+      "image": "https://selectnetwork.com/logo.jpg",
+      "@id": "https://selectnetwork.com",
+      "url": "https://selectnetwork.com",
+      "telephone": "+1-555-123-4567",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Business Ave",
+        "addressLocality": "New York",
+        "addressRegion": "NY",
+        "postalCode": "10001",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 40.7128,
+        "longitude": -74.0060
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      },
+      "sameAs": [
+        "https://facebook.com/selectnetwork",
+        "https://twitter.com/selectnetwork",
+        "https://instagram.com/selectnetwork",
+        "https://linkedin.com/company/selectnetwork"
+      ]
+    }
+  </script>
+
   <style>
     /* Custom animations */
     @keyframes fadeIn {
@@ -92,15 +137,15 @@
       <!-- Desktop Navigation -->
       <div class="hidden md:flex space-x-8 items-center">
         <a href="index.html" class="hover:text-[#3E92CC] dark:hover:text-blue-300 transition focus:outline-none focus:ring-2 focus:ring-white focus:rounded">Home</a>
-        <a href="services.html" class="text-[#3E92CC] dark:text-blue-300 font-semibold active-nav-item focus:outline-none">Services</a>
+        <a href="services.html" class="text-[#3E92CC] dark:text-blue-300 font-semibold active-nav-item focus:outline-none" aria-current="page">Services</a>
         <a href="portfolio.html" class="hover:text-[#3E92CC] dark:hover:text-blue-300 transition focus:outline-none focus:ring-2 focus:ring-white focus:rounded">Portfolio</a>
         <a href="about.html" class="hover:text-[#3E92CC] dark:hover:text-blue-300 transition focus:outline-none focus:ring-2 focus:ring-white focus:rounded">About</a>
         <a href="contact.html" class="hover:text-[#3E92CC] dark:hover:text-blue-300 transition focus:outline-none focus:ring-2 focus:ring-white focus:rounded">Contact</a>
         
         <!-- Theme Toggle -->
         <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition focus:outline-none focus:ring-2 focus:ring-white" aria-label="Toggle dark mode">
-          <span class="dark:hidden">🌙</span>
-          <span class="hidden dark:inline">☀️</span>
+          <span class="dark:hidden"><i class="fas fa-moon"></i></span>
+          <span class="hidden dark:inline"><i class="fas fa-sun"></i></span>
         </button>
       </div>
       
@@ -118,14 +163,14 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu hidden md:hidden bg-[#0A2463] dark:bg-gray-700 py-2 px-4 transition-all duration-300" aria-hidden="true">
       <a href="index.html" class="block py-3 px-4 hover:bg-white/10 rounded transition focus:bg-white/20">Home</a>
-      <a href="services.html" class="block py-3 px-4 bg-white/10 rounded transition text-[#3E92CC] dark:text-blue-300 focus:bg-white/20">Services</a>
+      <a href="services.html" class="block py-3 px-4 bg-white/10 rounded transition text-[#3E92CC] dark:text-blue-300 focus:bg-white/20" aria-current="page">Services</a>
       <a href="portfolio.html" class="block py-3 px-4 hover:bg-white/10 rounded transition focus:bg-white/20">Portfolio</a>
       <a href="about.html" class="block py-3 px-4 hover:bg-white/10 rounded transition focus:bg-white/20">About</a>
       <a href="contact.html" class="block py-3 px-4 hover:bg-white/10 rounded transition focus:bg-white/20">Contact</a>
       <div class="pt-2 mt-2 border-t border-white/10">
         <button id="mobile-theme-toggle" class="flex items-center py-2 px-4 w-full focus:outline-none focus:bg-white/10 rounded" aria-label="Toggle dark mode">
-          <span class="mr-2 dark:hidden">🌙</span>
-          <span class="mr-2 hidden dark:inline">☀️</span>
+          <span class="mr-2 dark:hidden"><i class="fas fa-moon"></i></span>
+          <span class="mr-2 hidden dark:inline"><i class="fas fa-sun"></i></span>
           <span class="dark:hidden">Dark Mode</span>
           <span class="hidden dark:inline">Light Mode</span>
         </button>
@@ -147,62 +192,213 @@
     </div>
   </section>
 
-  <!-- Services Grid -->
-  <section class="py-16 container mx-auto px-4">
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+ <!-- Services Grid - Stable Version -->
+<section class="py-16 px-4">
+  <div class="container mx-auto">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
       <!-- Service 1: Graphic Design -->
-      <div class="service-card bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-        <div class="bg-[#3E92CC] w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto group-hover:bg-[#0A2463] transition-colors duration-300">
-          <i class="fas fa-paint-brush text-white text-2xl" aria-hidden="true"></i>
+      <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-lg transition-all">
+        <div class="bg-[#3E92CC] w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto">
+          <i class="fas fa-paint-brush text-white text-xl"></i>
         </div>
-        <h3 class="text-2xl font-bold mb-4 text-center text-[#0A2463] dark:text-white">Graphic Design</h3>
-        <p class="text-gray-600 dark:text-gray-300 text-center">Logos, flyers, business cards, and more that make your brand stand out.</p>
-        <div class="mt-6 text-center">
-          <a href="#graphic-design" class="text-[#3E92CC] dark:text-blue-400 hover:underline focus:outline-none focus:ring-2 focus:ring-[#3E92CC] focus:rounded">
-            Learn more <span aria-hidden="true">→</span>
+        <h3 class="text-xl font-bold mb-3 text-center text-[#0A2463] dark:text-white">Graphic Design</h3>
+        <p class="text-gray-600 dark:text-gray-300 text-center text-sm">Logos, flyers, business cards that make your brand stand out.</p>
+        <div class="mt-4 text-center">
+          <a href="#graphic-design" class="inline-block text-[#3E92CC] dark:text-blue-400 hover:underline text-sm">
+            Learn more →
           </a>
         </div>
       </div>
 
       <!-- Service 2: Digital Marketing -->
-      <div class="service-card bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-        <div class="bg-[#3E92CC] w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto group-hover:bg-[#0A2463] transition-colors duration-300">
-          <i class="fas fa-chart-line text-white text-2xl" aria-hidden="true"></i>
+      <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-lg transition-all">
+        <div class="bg-[#3E92CC] w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto">
+          <i class="fas fa-chart-line text-white text-xl"></i>
         </div>
-        <h3 class="text-2xl font-bold mb-4 text-center text-[#0A2463] dark:text-white">Digital Marketing</h3>
-        <p class="text-gray-600 dark:text-gray-300 text-center">Data-driven social media, SEO, and ad campaigns that convert.</p>
-        <div class="mt-6 text-center">
-          <a href="#digital-marketing" class="text-[#3E92CC] dark:text-blue-400 hover:underline focus:outline-none focus:ring-2 focus:ring-[#3E92CC] focus:rounded">
-            Learn more <span aria-hidden="true">→</span>
+        <h3 class="text-xl font-bold mb-3 text-center text-[#0A2463] dark:text-white">Digital Marketing</h3>
+        <p class="text-gray-600 dark:text-gray-300 text-center text-sm">Data-driven social media, SEO, and ad campaigns.</p>
+        <div class="mt-4 text-center">
+          <a href="#digital-marketing" class="inline-block text-[#3E92CC] dark:text-blue-400 hover:underline text-sm">
+            Learn more →
           </a>
         </div>
       </div>
 
       <!-- Service 3: Branding -->
-      <div class="service-card bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-        <div class="bg-[#3E92CC] w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto group-hover:bg-[#0A2463] transition-colors duration-300">
-          <i class="fas fa-palette text-white text-2xl" aria-hidden="true"></i>
+      <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-lg transition-all">
+        <div class="bg-[#3E92CC] w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto">
+          <i class="fas fa-palette text-white text-xl"></i>
         </div>
-        <h3 class="text-2xl font-bold mb-4 text-center text-[#0A2463] dark:text-white">Branding</h3>
-        <p class="text-gray-600 dark:text-gray-300 text-center">Complete corporate identity and strategy development.</p>
-        <div class="mt-6 text-center">
-          <a href="#branding" class="text-[#3E92CC] dark:text-blue-400 hover:underline focus:outline-none focus:ring-2 focus:ring-[#3E92CC] focus:rounded">
-            Learn more <span aria-hidden="true">→</span>
+        <h3 class="text-xl font-bold mb-3 text-center text-[#0A2463] dark:text-white">Branding</h3>
+        <p class="text-gray-600 dark:text-gray-300 text-center text-sm">Complete corporate identity and strategy.</p>
+        <div class="mt-4 text-center">
+          <a href="#branding" class="inline-block text-[#3E92CC] dark:text-blue-400 hover:underline text-sm">
+            Learn more →
           </a>
         </div>
       </div>
 
       <!-- Service 4: Web Development -->
-      <div class="service-card bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-        <div class="bg-[#3E92CC] w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto group-hover:bg-[#0A2463] transition-colors duration-300">
-          <i class="fas fa-code text-white text-2xl" aria-hidden="true"></i>
+      <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-lg transition-all">
+        <div class="bg-[#3E92CC] w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto">
+          <i class="fas fa-code text-white text-xl"></i>
         </div>
-        <h3 class="text-2xl font-bold mb-4 text-center text-[#0A2463] dark:text-white">Web Development</h3>
-        <p class="text-gray-600 dark:text-gray-300 text-center">Fast, responsive, and SEO-optimized websites that perform.</p>
-        <div class="mt-6 text-center">
-          <a href="#web-development" class="text-[#3E92CC] dark:text-blue-400 hover:underline focus:outline-none focus:ring-2 focus:ring-[#3E92CC] focus:rounded">
-            Learn more <span aria-hidden="true">→</span>
+        <h3 class="text-xl font-bold mb-3 text-center text-[#0A2463] dark:text-white">Web Development</h3>
+        <p class="text-gray-600 dark:text-gray-300 text-center text-sm">Fast, responsive, SEO-optimized websites.</p>
+        <div class="mt-4 text-center">
+          <a href="#web-development" class="inline-block text-[#3E92CC] dark:text-blue-400 hover:underline text-sm">
+            Learn more →
           </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Detailed Service Sections -->
+  <section id="graphic-design" class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col lg:flex-row items-center">
+        <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-[#0A2463] dark:text-white">Graphic Design</h2>
+          <p class="text-lg mb-6 text-gray-600 dark:text-gray-300">We create visually stunning designs that communicate your brand's message effectively. Our design process combines creativity with strategy to deliver assets that resonate with your audience.</p>
+          <ul class="space-y-3 mb-8 text-gray-600 dark:text-gray-300">
+            <li class="flex items-start">
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+              <span>Custom logo design that captures your brand essence</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+              <span>Marketing collateral (flyers, brochures, business cards)</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+              <span>Social media graphics and templates</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+              <span>Print and digital ad designs</span>
+            </li>
+          </ul>
+          <button class="bg-[#3E92CC] hover:bg-[#0A2463] text-white px-6 py-3 rounded-lg font-bold transition-all duration-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
+            Get a Design Quote
+          </button>
+        </div>
+        <div class="lg:w-1/2">
+          <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg">
+            <img src="/images/graphic/gra1.jpg" alt="Graphic design examples" class="w-full h-auto rounded-lg" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="digital-marketing" class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col lg:flex-row items-center">
+        <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10 order-2 lg:order-1">
+          <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg">
+            <img src="/images/digital/dig1.jpg" alt="Digital marketing strategy" class="w-full h-auto rounded-lg" loading="lazy">
+          </div>
+        </div>
+        <div class="lg:w-1/2 lg:pl-10 order-1 lg:order-2">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-[#0A2463] dark:text-white">Digital Marketing</h2>
+          <p class="text-lg mb-6 text-gray-600 dark:text-gray-300">Our data-driven marketing strategies help you reach the right audience at the right time. We combine analytics with creative campaigns to maximize your ROI.</p>
+          <ul class="space-y-3 mb-8 text-gray-600 dark:text-gray-300">
+            <li class="flex items-start">
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+              <span>Search Engine Optimization (SEO) to improve visibility</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+              <span>Pay-per-click (PPC) advertising management</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+              <span>Social media marketing and community management</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+              <span>Email marketing campaigns and automation</span>
+            </li>
+          </ul>
+          <button class="bg-[#3E92CC] hover:bg-[#0A2463] text-white px-6 py-3 rounded-lg font-bold transition-all duration-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
+            Boost Your Marketing
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="branding" class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col lg:flex-row items-center">
+        <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-[#0A2463] dark:text-white">Branding</h2>
+          <p class="text-lg mb-6 text-gray-600 dark:text-gray-300">We develop comprehensive brand identities that tell your unique story. Our branding services create cohesive experiences across all touchpoints.</p>
+          <ul class="space-y-3 mb-8 text-gray-600 dark:text-gray-300">
+            <li class="flex items-start">
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+              <span>Brand strategy and positioning</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+              <span>Visual identity systems (logo, colors, typography)</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+              <span>Brand voice and messaging guidelines</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+              <span>Brand collateral and style guides</span>
+            </li>
+          </ul>
+          <button class="bg-[#3E92CC] hover:bg-[#0A2463] text-white px-6 py-3 rounded-lg font-bold transition-all duration-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
+            Build Your Brand
+          </button>
+        </div>
+        <div class="lg:w-1/2">
+          <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg">
+            <img src="/images/branding/logo3.png" alt="Brand identity examples" class="w-full h-auto rounded-lg" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="web-development" class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col lg:flex-row items-center">
+        <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10 order-2 lg:order-1">
+          <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg">
+            <img src="/images/web/web1.jpeg" alt="Web development process" class="w-full h-auto rounded-lg" loading="lazy">
+          </div>
+        </div>
+        <div class="lg:w-1/2 lg:pl-10 order-1 lg:order-2">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-[#0A2463] dark:text-white">Web Development</h2>
+          <p class="text-lg mb-6 text-gray-600 dark:text-gray-300">We build fast, responsive websites that deliver exceptional user experiences. Our development process focuses on performance, accessibility, and SEO.</p>
+          <ul class="space-y-3 mb-8 text-gray-600 dark:text-gray-300">
+            <li class="flex items-start">
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+              <span>Custom website design and development</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+              <span>E-commerce solutions with secure payment integration</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+              <span>Content Management Systems (WordPress, Shopify, etc.)</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+              <span>Website maintenance and security updates</span>
+            </li>
+          </ul>
+          <button class="bg-[#3E92CC] hover:bg-[#0A2463] text-white px-6 py-3 rounded-lg font-bold transition-all duration-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
+            Launch Your Website
+          </button>
         </div>
       </div>
     </div>
@@ -219,27 +415,19 @@
           <p class="text-4xl font-bold mb-6 dark:text-white">$199<span class="text-lg">/project</span></p>
           <ul class="text-left space-y-3 mb-8 text-gray-600 dark:text-gray-300">
             <li class="flex items-start">
-              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
               <span>1 Logo Design</span>
             </li>
             <li class="flex items-start">
-              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
               <span>2 Flyer Designs</span>
             </li>
             <li class="flex items-start">
-              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
               <span>1 Revision Round</span>
             </li>
             <li class="flex items-start text-gray-400 dark:text-gray-500">
-              <svg class="w-5 h-5 text-gray-400 dark:text-gray-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
+              <i class="fas fa-times text-gray-400 dark:text-gray-500 mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
               <span>No Website</span>
             </li>
           </ul>
@@ -257,27 +445,19 @@
           <p class="text-4xl font-bold mb-6 dark:text-white">$499<span class="text-lg">/project</span></p>
           <ul class="text-left space-y-3 mb-8 text-gray-600 dark:text-gray-300">
             <li class="flex items-start">
-              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
               <span>Full Brand Identity</span>
             </li>
             <li class="flex items-start">
-              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
               <span>5 Flyer Designs</span>
             </li>
             <li class="flex items-start">
-              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
               <span>3 Revision Rounds</span>
             </li>
             <li class="flex items-start">
-              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
               <span>Basic Website</span>
             </li>
           </ul>
@@ -292,27 +472,19 @@
           <p class="text-4xl font-bold mb-6 dark:text-white">$999<span class="text-lg">/project</span></p>
           <ul class="text-left space-y-3 mb-8 text-gray-600 dark:text-gray-300">
             <li class="flex items-start">
-              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
               <span>Premium Branding</span>
             </li>
             <li class="flex items-start">
-              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
               <span>Unlimited Designs</span>
             </li>
             <li class="flex items-start">
-              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
               <span>5 Revision Rounds</span>
             </li>
             <li class="flex items-start">
-              <svg class="w-5 h-5 text-[#3E92CC] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
+              <i class="fas fa-check text-[#3E92CC] mr-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
               <span>Advanced Website + SEO</span>
             </li>
           </ul>
@@ -324,16 +496,131 @@
     </div>
   </section>
 
+  <!-- Testimonials -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center text-[#0A2463] dark:text-white">What Our Clients Say</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-[#3E92CC] flex items-center justify-center text-white font-bold mr-4">JD</div>
+            <div>
+              <h4 class="font-bold text-[#0A2463] dark:text-white">John Doe</h4>
+              <p class="text-gray-500 dark:text-gray-400">CEO, TechStart</p>
+            </div>
+          </div>
+          <p class="text-gray-600 dark:text-gray-300 italic">"Select Network transformed our brand identity completely. Their attention to detail and creative approach exceeded our expectations."</p>
+          <div class="mt-4 text-[#3E92CC]">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-[#3E92CC] flex items-center justify-center text-white font-bold mr-4">AS</div>
+            <div>
+              <h4 class="font-bold text-[#0A2463] dark:text-white">Alice Smith</h4>
+              <p class="text-gray-500 dark:text-gray-400">Marketing Director</p>
+            </div>
+          </div>
+          <p class="text-gray-600 dark:text-gray-300 italic">"Our website traffic increased by 300% after implementing their SEO strategies. The team is professional and results-driven."</p>
+          <div class="mt-4 text-[#3E92CC]">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
+        
+        <!-- Testimonial 3 -->
+        <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-[#3E92CC] flex items-center justify-center text-white font-bold mr-4">RJ</div>
+            <div>
+              <h4 class="font-bold text-[#0A2463] dark:text-white">Robert Johnson</h4>
+              <p class="text-gray-500 dark:text-gray-400">Small Business Owner</p>
+            </div>
+          </div>
+          <p class="text-gray-600 dark:text-gray-300 italic">"The branding package gave my business a professional look that helped me stand out from competitors. Worth every penny!"</p>
+          <div class="mt-4 text-[#3E92CC]">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-gradient-to-r from-[#0A2463] to-[#3E92CC] text-white text-center">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Business?</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto">Let's discuss how we can help you achieve your goals with our tailored services.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="contact.html" class="bg-white text-[#0A2463] hover:bg-gray-100 px-8 py-4 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#3E92CC]">
+          Get in Touch
+        </a>
+        <a href="tel:+15551234567" class="bg-transparent border-2 border-white hover:bg-white/10 px-8 py-4 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white">
+          <i class="fas fa-phone mr-2" aria-hidden="true"></i> Call Us
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="bg-[#0A2463] dark:bg-gray-800 text-white py-8">
     <div class="container mx-auto px-4">
-      <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">Select Network</h3>
+          <p class="text-gray-300">Helping businesses grow through strategic design and digital solutions since 2015.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Services</h3>
+          <ul class="space-y-2">
+            <li><a href="#graphic-design" class="text-gray-300 hover:text-white transition">Graphic Design</a></li>
+            <li><a href="#digital-marketing" class="text-gray-300 hover:text-white transition">Digital Marketing</a></li>
+            <li><a href="#branding" class="text-gray-300 hover:text-white transition">Branding</a></li>
+            <li><a href="#web-development" class="text-gray-300 hover:text-white transition">Web Development</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Company</h3>
+          <ul class="space-y-2">
+            <li><a href="about.html" class="text-gray-300 hover:text-white transition">About Us</a></li>
+            <li><a href="portfolio.html" class="text-gray-300 hover:text-white transition">Portfolio</a></li>
+            <li><a href="blog.html" class="text-gray-300 hover:text-white transition">Blog</a></li>
+            <li><a href="contact.html" class="text-gray-300 hover:text-white transition">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">Connect</h3>
+          <div class="flex space-x-4 mb-4">
+            <a href="#" aria-label="Facebook" class="text-gray-300 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter" class="text-gray-300 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram" class="text-gray-300 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn" class="text-gray-300 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          <p class="text-gray-300">
+            <i class="fas fa-envelope mr-2"></i> info@selectnetwork.com
+          </p>
+        </div>
+      </div>
+      <div class="pt-6 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
         <p>© 2025 Select Network. All rights reserved.</p>
         <div class="flex space-x-6 mt-4 md:mt-0">
-          <a href="#" aria-label="Facebook" class="hover:text-[#3E92CC] transition"><i class="fab fa-facebook"></i></a>
-          <a href="#" aria-label="Twitter" class="hover:text-[#3E92CC] transition"><i class="fab fa-twitter"></i></a>
-          <a href="#" aria-label="Instagram" class="hover:text-[#3E92CC] transition"><i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="LinkedIn" class="hover:text-[#3E92CC] transition"><i class="fab fa-linkedin"></i></a>
+          <a href="#" class="text-gray-300 hover:text-white transition">Privacy Policy</a>
+          <a href="#" class="text-gray-300 hover:text-white transition">Terms of Service</a>
         </div>
       </div>
     </div>
